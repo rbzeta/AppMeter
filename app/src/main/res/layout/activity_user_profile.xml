@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_user_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="app.rbzeta.applicationmeter.activity.UserProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/text_user_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:textColor="@android:color/white"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:textStyle="bold"/>
+
+        <Button
+            android:text="@string/button_input_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonFillName"
+            android:textAllCaps="false"
+            android:background="@drawable/button_transparent_radius"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:textColor="@android:color/white"/>
+        <Button
+            android:text="@string/button_input_pn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonFillPN"
+            android:textAllCaps="false"
+            android:background="@drawable/button_transparent_radius"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:text="@string/button_input_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonFillPhone"
+            android:textAllCaps="false"
+            android:background="@drawable/button_transparent_radius"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:text="@string/button_save_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSaveProfile"
+            android:textAllCaps="false"
+            android:background="@drawable/button_transparent_radius"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+</RelativeLayout>

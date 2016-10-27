@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_name">40</integer>
+    <integer name="max_phone_number">15</integer>
+    <integer name="min_phone_number">6</integer>
+    <integer name="max_emp_id">8</integer>
+</resources>

@@ -2,6 +2,7 @@ package app.rbzeta.applicationmeter.activity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -24,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import app.rbzeta.applicationmeter.R;
 import app.rbzeta.applicationmeter.bc.ConnectivityReceiver;
 import app.rbzeta.applicationmeter.dialog.EditTextDialogFragment;
+import app.rbzeta.applicationmeter.helper.SessionManager;
 import app.rbzeta.applicationmeter.helper.UIHelper;
 import app.rbzeta.applicationmeter.rest.ApiClient;
 import app.rbzeta.applicationmeter.rest.ApiInterface;
@@ -36,7 +38,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements EditTextDialogFragment.ButtonOKDialogListener{
-    Button butnstart, butnreset,butnsubmit,buttonChooseApp,buttonChooseBranch;
+    Button butnstart, butnreset,butnsubmit,buttonChooseApp,buttonChooseBranch,buttonChangeProfile;
     TextView textMinute,textSecond,textMillis;
     long starttime = 0L;
     long timeInMilliseconds = 0L;
@@ -51,95 +53,118 @@ public class MainActivity extends AppCompatActivity
     Handler handler = new Handler();
 
     SimpleAdapter adapter;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        butnstart = (Button) findViewById(R.id.start);
-        butnreset = (Button) findViewById(R.id.reset);
-        butnsubmit = (Button) findViewById(R.id.submit);
-        buttonChooseApp = (Button) findViewById(R.id.buttonChooseApp);
-        buttonChooseBranch = (Button) findViewById(R.id.buttonBranchCode);
-        textMinute = (TextView) findViewById(R.id.timerMinute);
-        textSecond = (TextView) findViewById(R.id.timerSecond);
-        textMillis = (TextView) findViewById(R.id.timerMillis);
 
-        butnstart.setOnClickListener(new OnClickListener() {
+        session = new SessionManager(this,MODE_PRIVATE);
+        if (session.getUserName() == "" || session.getUserPhone() == "" ||
+                session.getUserEmployeeId() == 0){
+            Intent intent = new Intent(this,UserProfileActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
 
-            @Override
-            public void onClick(View v) {
+            setContentView(R.layout.activity_main);
+            butnstart = (Button) findViewById(R.id.start);
+            butnreset = (Button) findViewById(R.id.reset);
+            butnsubmit = (Button) findViewById(R.id.submit);
+            buttonChooseApp = (Button) findViewById(R.id.buttonChooseApp);
+            buttonChooseBranch = (Button) findViewById(R.id.buttonBranchCode);
+            buttonChangeProfile = (Button) findViewById(R.id.buttonChangeProfile);
+            textMinute = (TextView) findViewById(R.id.timerMinute);
+            textSecond = (TextView) findViewById(R.id.timerSecond);
+            textMillis = (TextView) findViewById(R.id.timerMillis);
 
-                if (!(mApplicationId >= 0)){
-                    UIHelper.showCustomSnackBar(v,getString(R.string.err_app_id_not_choosen),Color.RED);
-                    return;
+            butnstart.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    if (!(mApplicationId >= 0)) {
+                        UIHelper.showCustomSnackBar(v, getString(R.string.err_app_id_not_choosen), Color.RED);
+                        return;
+                    }
+
+                    if (mBranchCode == 0) {
+                        UIHelper.showCustomSnackBar(v, getString(R.string.err_branch_id_not_fill), Color.RED);
+                        return;
+                    }
+                    if (t == 1) {
+                        butnstart.setText(getString(R.string.stop));
+                        starttime = SystemClock.uptimeMillis();
+                        handler.postDelayed(updateTimer, 0);
+                        t = 0;
+                        butnsubmit.setVisibility(View.GONE);
+                    } else {
+                        butnstart.setText(getString(R.string.start));
+                        //time.setTextColor(Color.BLUE);
+                        timeSwapBuff += timeInMilliseconds;
+                        handler.removeCallbacks(updateTimer);
+                        butnsubmit.setVisibility(View.VISIBLE);
+                        t = 1;
+                    }
+                }
+            });
+
+            butnreset.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    resetTimer();
+                }
+            });
+
+
+            buttonChooseApp.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!ConnectivityReceiver.isConnected()) {
+                        UIHelper.showCustomSnackBar(v,
+                                getString(R.string.err_no_network_connection), Color.WHITE);
+
+                    } else {
+                        populateAppListFromServer();
+                    }
+
                 }
 
-                if (mBranchCode == 0){
-                    UIHelper.showCustomSnackBar(v,getString(R.string.err_branch_id_not_fill),Color.RED);
-                    return;
+
+            });
+
+            buttonChooseBranch.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showInputBranchId();
                 }
-                if (t == 1) {
-                    butnstart.setText("Pause");
-                    starttime = SystemClock.uptimeMillis();
-                    handler.postDelayed(updateTimer, 0);
-                    t = 0;
-                    butnsubmit.setVisibility(View.GONE);
-                } else {
-                    butnstart.setText(getString(R.string.start));
-                    //time.setTextColor(Color.BLUE);
-                    timeSwapBuff += timeInMilliseconds;
-                    handler.removeCallbacks(updateTimer);
-                    butnsubmit.setVisibility(View.VISIBLE);
-                    t = 1;
-                }}
-        });
+            });
 
-        butnreset.setOnClickListener(new OnClickListener() {
+            butnsubmit.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!ConnectivityReceiver.isConnected()) {
+                        UIHelper.showCustomSnackBar(v,
+                                getString(R.string.err_no_network_connection), Color.WHITE);
 
-            @Override
-            public void onClick(View v) {
+                    } else {
+                        submitResult();
+                    }
 
-               resetTimer();
-            }});
-
-
-        buttonChooseApp.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!ConnectivityReceiver.isConnected()){
-                    UIHelper.showCustomSnackBar(v,
-                            getString(R.string.err_no_network_connection), Color.WHITE);
-
-                }else{
-                    populateAppListFromServer();
                 }
+            });
 
-            }
-
-
-        });
-        
-        buttonChooseBranch.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showInputBranchId();
-            }
-        });
-
-        butnsubmit.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!ConnectivityReceiver.isConnected()){
-                    UIHelper.showCustomSnackBar(v,
-                            getString(R.string.err_no_network_connection), Color.WHITE);
-
-                }else{
-                    submitResult();
+            buttonChangeProfile.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this
+                            ,UserProfileActivity.class);
+                    startActivity(intent);
                 }
-
-            }
-        });
+            });
+        }
     }
 
     private void populateAppListFromServer() {
@@ -209,7 +234,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void submitResult() {
-        if (mBranchCode != 0 && mApplicationId >= 0){
+        if (mBranchCode != 0 && mApplicationId >= 0 &&
+                session.getUserName() != "" || session.getUserPhone() != "" ||
+                session.getUserEmployeeId() != 0){
             sendResult();
         }else
             UIHelper.showCustomSnackBar(butnsubmit,getString(R.string.err_submit_result),Color.RED);
@@ -228,6 +255,9 @@ public class MainActivity extends AppCompatActivity
         result.setApplicationId(mApplicationId);
         result.setBranchId(mBranchCode);
         result.setTimeMillis(timemillis);
+        result.setName(session.getUserName());
+        result.setPersonalNumber(session.getUserEmployeeId());
+        result.setPhone(session.getUserPhone());
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 

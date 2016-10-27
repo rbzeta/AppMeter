@@ -16,6 +16,39 @@ public class BenchmarkResult {
     @SerializedName("time")
     long timeMillis;
 
+    @SerializedName("name")
+    String name;
+
+    @SerializedName("phone")
+    String phone;
+
+    @SerializedName("personal_number")
+    int personalNumber;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getPersonalNumber() {
+        return personalNumber;
+    }
+
+    public void setPersonalNumber(int personalNumber) {
+        this.personalNumber = personalNumber;
+    }
+
     public int getApplicationId() {
         return applicationId;
     }

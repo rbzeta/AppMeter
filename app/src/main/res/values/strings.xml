@@ -27,4 +27,24 @@
     <string name="dialog_title_fetch_app">Fetching Application</string>
     <string name="err_no_app">There is no application to benchmark</string>
     <string name="err_no_network_connection">Please check your network connection</string>
+    <string name="text_user_profile">Please input your profile first</string>
+    <string name="button_input_name">Your Name</string>
+    <string name="button_input_pn">Your Personal Number</string>
+    <string name="button_phone">Your Phone Number</string>
+    <string name="button_save_profile">Done</string>
+    <string name="number">NUMBER</string>
+    <string name="phone">PHONE</string>
+    <string name="dialog_title_input_name">Enter Your Name</string>
+    <string name="dialog_title_input_name_hint">Your Name</string>
+    <string name="dialog_title_input_pn">Enter Your Personal Number</string>
+    <string name="dialog_title_input_pn_hint">Personal Number</string>
+    <string name="dialog_title_input_phone">Enter Your Phone Number</string>
+    <string name="dialog_title_input_phone_hint">Phone Number</string>
+    <string name="err_user_name_length">Name should not be more than 40 characters</string>
+    <string name="err_user_phone_length">Phone Number should be between 6 to 15 characters</string>
+    <string name="err_user_empid_length">Personal Number should not be more than 8 characters</string>
+    <string name="err_complete_profile">Please complete your profile first</string>
+    <string name="button_input_phone">Your Phone Number</string>
+    <string name="button_change_user_profile">User Profile</string>
+    <string name="stop">Stop</string>
 </resources>

@@ -33,7 +33,6 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:textColor="@android:color/white"/>
 
-
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -133,7 +132,6 @@
 
     </android.support.v7.widget.CardView>
 
-
 </LinearLayout>
     <TextView
         android:id="@+id/textCreatedBy"
@@ -142,7 +140,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical|center_horizontal"
         android:textColor="@android:color/white"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/button_margin"/>
 
     <TextView
         android:id="@+id/textAppDesc"
@@ -152,5 +151,16 @@
         android:gravity="center_vertical|center_horizontal"
         android:textColor="@android:color/white"
         android:layout_above="@id/textCreatedBy"/>
+    <Button
+        android:text="@string/button_change_user_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonChangeProfile"
+        android:textAllCaps="false"
+        android:background="@drawable/button_transparent_radius"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:textColor="@android:color/white"
+        android:layout_above="@id/textAppDesc"/>
+
 
 </RelativeLayout>
