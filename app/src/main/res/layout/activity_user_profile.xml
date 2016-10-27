@@ -55,17 +55,17 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:textColor="@android:color/white"/>
 
-        <Button
-            android:text="@string/button_save_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonSaveProfile"
-            android:textAllCaps="false"
-            android:background="@drawable/button_transparent_radius"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:textColor="@android:color/white"/>
     </LinearLayout>
-
+    <Button
+        android:text="@string/button_save_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSaveProfile"
+        android:textAllCaps="false"
+        android:background="@drawable/button_transparent_radius"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

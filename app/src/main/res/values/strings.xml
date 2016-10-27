@@ -31,7 +31,7 @@
     <string name="button_input_name">Your Name</string>
     <string name="button_input_pn">Your Personal Number</string>
     <string name="button_phone">Your Phone Number</string>
-    <string name="button_save_profile">Done</string>
+    <string name="button_save_profile">Save</string>
     <string name="number">NUMBER</string>
     <string name="phone">PHONE</string>
     <string name="dialog_title_input_name">Enter Your Name</string>
