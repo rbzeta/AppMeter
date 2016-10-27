@@ -7,8 +7,8 @@ android {
         applicationId "app.rbzeta.applicationmeter"
         minSdkVersion 18
         targetSdkVersion 24
-        versionCode 2
-        versionName "1.1-beta"
+        versionCode 3
+        versionName "1.2-beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
