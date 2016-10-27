@@ -1,0 +1,156 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:background="@color/colorPrimary"
+    tools:context=".activity.MainActivity">
+
+    <Button
+        android:text="@string/button_choose_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonChooseApp"
+        android:textAllCaps="false"
+        android:background="@drawable/button_transparent_radius"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:textColor="@android:color/white"/>
+    <Button
+        android:text="@string/button_choose_branch_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBranchCode"
+        android:textAllCaps="false"
+        android:background="@drawable/button_transparent_radius"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:textColor="@android:color/white"/>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/post_card_margin"
+        card_view:cardElevation="@dimen/post_card_elevation"
+        card_view:cardCornerRadius="@dimen/post_card_radius"
+        card_view:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical|center_horizontal">
+
+                <TextView
+                    android:id="@+id/timerMinute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_time_hour"
+                    android:textColor="#1c1c1c"
+                    android:textSize="60sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_time_separator"
+                    android:textColor="#1c1c1c"
+                    android:textSize="60sp" />
+                <TextView
+                    android:id="@+id/timerSecond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_time_hour"
+                    android:textColor="#1c1c1c"
+                    android:textSize="60sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_time_separator"
+                    android:textColor="#1c1c1c"
+                    android:textSize="60sp" />
+                <TextView
+                    android:id="@+id/timerMillis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_time_hour"
+                    android:textColor="#1c1c1c"
+                    android:textSize="60sp" />
+
+            </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_margin="@dimen/activity_horizontal_margin">
+            <Button
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/start"
+                android:background="@drawable/button_blue_radius"
+                android:layout_margin="@dimen/button_margin"/>
+            <Button
+                android:id="@+id/reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/reset"
+                android:background="@drawable/button_blue_radius"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/submit_result"
+                android:background="@drawable/button_blue_radius"
+                android:layout_marginTop="@dimen/button_margin"
+                android:layout_marginLeft="@dimen/button_margin"
+                android:layout_marginRight="@dimen/button_margin"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
+    <TextView
+        android:id="@+id/textCreatedBy"
+        android:text="@string/created_by"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:id="@+id/textAppDesc"
+        android:text="@string/app_name_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="@android:color/white"
+        android:layout_above="@id/textCreatedBy"/>
+
+</RelativeLayout>
